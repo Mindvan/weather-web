@@ -19,7 +19,7 @@ const Weather = () => {
             },
             body: JSON.stringify({city})
         }
-        const resp = await fetch('http://localhost:5000/post_city', request);
+        const resp = await fetch('/post_city', request);
         console.log(resp);
 
         let respData = await resp.json();
