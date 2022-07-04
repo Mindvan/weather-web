@@ -1,8 +1,7 @@
 const express = require('express');
-const app = express()
+app = express()
 const cors = require("cors")
-const port = 8000
-
+const port = 5000
 const fetch = require("isomorphic-fetch");
 const cheerio = require("cheerio");
 
@@ -10,29 +9,30 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
 
+global.app.get("/api", (req, res) => {
+    res.json({
+        city: description.city,
+        country: description.country,
+        main: description.main,
+        tempReal: description.tempReal,
+        tempLike: description.tempLike,
+        dateDay: description.dateDay,
+        dateTimeNow: description.dateTimeNow,
+        dateTimeZone: description.dateTimeZone,
+        sunRise: description.sunRise,
+        sunSet: description.sunSet,
+        wind: description.wind,
+        humidity: description.humidity,
+        pressure: description.pressure
+    })
+    console.log(description);
+})
+
 app.post("/post_city", async (req, res) => {
     let {cityName} = req.body
 
     async function app2() {
         const description = await getDescription(cityName);
-        app.get("/api", (req, res) => {
-            res.json({
-                city: description.city,
-                country: description.country,
-                main: description.main,
-                tempReal: description.tempReal,
-                tempLike: description.tempLike,
-                dateDay: description.dateDay,
-                dateTimeNow: description.dateTimeNow,
-                dateTimeZone: description.dateTimeZone,
-                sunRise: description.sunRise,
-                sunSet: description.sunSet,
-                wind: description.wind,
-                humidity: description.humidity,
-                pressure: description.pressure
-            })
-        })
-        console.log(description);
     }
 
     async function getDescription(symbol) {
